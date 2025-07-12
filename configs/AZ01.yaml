@@ -1,0 +1,5 @@
+partner_id: AZ01
+state:      Arizona
+train_query: "SELECT * FROM raw.churn_input WHERE partner_id = 'AZ01'"
+target_col:  quick_churn
+ref_bucket:  s3://bc-churn-ref/AZ01/
