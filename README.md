@@ -85,49 +85,47 @@ python churn_model_oop.py \
        --output artifacts/AZ01
 
 
-Repository structure:
-BetterCollective/
-|
-|-- README.txt
-|-- pyproject.toml / requirements.txt <- It has the modules I used and version.
-|
-|-- data/                    <- Here I stored the sample data and the .parquet that I saved with the clean data, but it would be partitioned as I stated earlier
-|   |-- cleaned_data_for_fcst.parquet   <- Cleaned data that I exported
-|   |-- sample_data__technical_assessment_1.xlsx   <- Sample data
-|   |-- .gitkeep
-|
-|-- Code/               <- exploratory & presentation notebooks (for this exersice I'll upload .py files since I coded on pure python)
-|   |-- Data Exploration.py
-|   |-- Functions.py
-|
-|-- src/                     <- pure Python code importable as a package
-|   |-- __init__.py
-|   |-- features/            <- deterministic feature logic
-|   |   |-- __init__.py
-|   |   |-- make_dataset.py  <- This doesn't exist
-|   |
-|   |-- models/              <- training scripts & model defs
-|   |   |-- churn_model_oop.py   # OOP artefact creator
-|   |   |-- train.py             # thin wrapper to call EarlyChurnModel via CLI
-|   |	|-- Baseline training.py
-|   |	|-- Early Churn Classifier.py
-|   |
-|   |-- monitoring/         <- production health checks
-|       |-- monitoring_pipeline.py
-|
-|-- configs/                 <- partner-specific YAMLs
-|   |-- AZ01.yaml
-|   |-- CO02.yaml
-|   |-- …
-|
-|-- docker/                  <- Dockerfile + entrypoints
-|
-|-- artifacts/               <- Model outputs only
-|   |-- AZ01/
-|   |   |-- pipeline.joblib
-|   |   |-- meta.json
-|   |   |-- metrics.json
-|   |-- km_baseline_survival.csv
-|
-|-- .github/                 <- workflow templates
-
+Repository structure ():
+BetterCollective
+├── README.md
+├── requirements.txt         # or pyproject.toml
+│
+├── data/                    # raw + cleaned datasets (never commit raw in real life)
+│   ├── sample_data__technical_assessment_1.xlsx
+│   └── cleaned_data_for_fcst.parquet
+│
+├── Code/                    # ad-hoc scripts / exploratory work
+│   ├── Data Exploration.py
+│   └── Functions.py
+│
+├── src/                     
+│   ├── __init__.py
+│   ├── features/
+│   │   ├── __init__.py
+│   │   └── make_dataset.py          #empty
+│   │
+│   ├── models/                      # training scripts & model defs
+│   │   ├── churn_model_oop.py       # OOP artefact creator
+│   │   ├── train.py                 # CLI wrapper
+│   │   ├── Baseline training.py
+│   │   └── Early Churn Classifier.py
+│   │
+│   └── monitoring/                 # production health checks
+│       └── monitoring_pipeline.py
+│
+├── configs/                # partner-specific YAML configs
+│   ├── AZ01.yaml
+│   └── CO02.yaml
+│
+├── docker/
+│   └── Dockerfile          # (+ entrypoint scripts if needed)
+│
+├── artifacts/              # small, sample artefacts for reviewers
+│   ├── AZ01/
+│   │   ├── pipeline.joblib
+│   │   ├── meta.json
+│   │   └── metrics.json
+│   └── km_baseline_survival.csv
+│
+└── .github/
+    └── workflows/ci.yml    # unit-test / lint / build
